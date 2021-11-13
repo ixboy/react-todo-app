@@ -2,7 +2,7 @@ import Header from "./Header"
 import React from "react"
 import TodosList from "./TodosList";
 class TodoContainer extends React.Component {
-  
+
   state = {
     todos: [
       {
@@ -21,13 +21,28 @@ class TodoContainer extends React.Component {
         completed: false
       }
     ]
-   };
-  
+  };
+
+  handleChange = (id) => {
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          }
+        }
+        return todo
+      }),
+    }))
+    // console.log("clicked", id);
+  };
+
   render() {
     return (
       <div>
         <Header />
-       <TodosList todos={this.state.todos} />
+        <TodosList todos={this.state.todos} handleChangeProps={this.handleChange} />
       </div>
     )
   }
