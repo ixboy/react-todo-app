@@ -9,7 +9,8 @@ export class TodosList extends React.Component {
         <TodoItem key={todo.id}
          todo={todo}
          handleChangeProps={this.props.handleChangeProps}
-         deleteTodoProps={this.props.deleteTodoProps} 
+         deleteTodoProps={this.props.deleteTodoProps}
+         editTodoProps={this.props.editTodoProps} 
          />
       ))}
     </ul>
