@@ -1,27 +1,11 @@
+import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import Header from "./Header";
 import InputTodo from "./InputTodo";
-import React from "react";
 import TodosList from "./TodosList";
-import { v4 as uuidv4 } from "uuid";
 class TodoContainer extends React.Component {
   state = {
-    todos: [
-      {
-        id: uuidv4(),
-        title: "Setup development environment",
-        completed: true,
-      },
-      {
-        id: uuidv4(),
-        title: "Develop website and add content",
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        title: "Deploy to live server",
-        completed: false,
-      },
-    ],
+    todos: []
   };
 
   addTodoItem = (title) => {
@@ -53,7 +37,7 @@ class TodoContainer extends React.Component {
       }),
     }));
   };
-  
+
   setUpdate = (updatedTitle, id) => {
     this.setState({
       todos: this.state.todos.map(todo => {
@@ -65,8 +49,14 @@ class TodoContainer extends React.Component {
     })
   }
 
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .then(response => response.json())
+      .then(data => this.setState({todos: data}));
+  }
+
   render() {
-    
+
     return (
       <div className="container">
         <div className="inner">
