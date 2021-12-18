@@ -9,11 +9,15 @@ class TodoItem extends React.Component {
   handleEditing = () => {
     this.setState({ editing: true });
   };
-  
+
   handleUpdatedDone = event => {
     if (event.key === "Enter") {
       this.setState({ editing: false })
     }
+  }
+
+  componentWillUnmount() {
+    console.log("Cleaning up...")
   }
 
   render() {
@@ -56,7 +60,7 @@ class TodoItem extends React.Component {
           className={styles.textInput}
           style={editMode}
           value={title}
-          onChange={(e)=> this.props.editTodoProps(e.target.value, id)}
+          onChange={(e) => this.props.editTodoProps(e.target.value, id)}
           onKeyDown={this.handleUpdatedDone}
         />
       </li>
